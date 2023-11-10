@@ -13,7 +13,8 @@ public class DatabaseConnection {
      public static Connection getConnection() {
         Connection connection = null;
         try {
-            String url = "jdbc:mysql://localhost:3308/musicdb";
+            String url = "jdbc:mysql://localhost:3306/musicdb";
+            //String url = "jdbc:mysql://localhost:3308/musicdb"; //casa
             String username = "root";
             String password = "";
             connection = DriverManager.getConnection(url, username, password);
