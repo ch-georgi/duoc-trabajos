@@ -1,10 +1,10 @@
 
-package modelos;
+package com.gccg.soundscape.modelos;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Song")
+@Table(name = "song")
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,25 +20,24 @@ public class Song {
     @Column(name = "duracion")
     private int duracion;
     
-    @ManyToOne()
-    @JoinColumn(name = "artista")
-    private Artist artista;
+    @ManyToOne
+    @JoinColumn(name = "artista", nullable=false)
+    private Artist artist;
     
-    @ManyToOne()
-    @JoinColumn(name = "genero")
-    private Genere genero;
+    @ManyToOne
+    @JoinColumn(name = "genero", nullable=false)
+    private Genere genere;
 
     //Constructores
     public Song() {
     }
 
-    public Song(int id, String titulo, int anio, int duracion, Artist artista, Genere genero) {
-        this.id = id;
+    public Song(String titulo, int anio, int duracion, Artist artista, Genere genero) {
         this.titulo = titulo;
         this.anio = anio;
         this.duracion = duracion;
-        this.artista = artista;
-        this.genero = genero;
+        this.artist = artista;
+        this.genere = genero;
     }
 
     //Getters y Setters
@@ -75,19 +74,19 @@ public class Song {
     }
 
     public Artist getArtista() {
-        return artista;
+        return artist;
     }
 
     public void setArtista(Artist artista) {
-        this.artista = artista;
+        this.artist = artista;
     }
 
     public Genere getGenero() {
-        return genero;
+        return genere;
     }
 
     public void setGenero(Genere genero) {
-        this.genero = genero;
+        this.genere = genero;
     }
     
     

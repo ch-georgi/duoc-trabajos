@@ -1,9 +1,13 @@
-
 package com.gccg.soundscape;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.gccg.soundscape.modelos.*;
+import com.gccg.soundscape.dao.*;
+import java.util.List;
 
 /**
  *
@@ -14,7 +18,7 @@ public class SoundScape {
     public static void main(String[] args) {
         System.out.println("Hello World!");
         // Get a database connection
-        Connection connection = DatabaseConnection.getConnection();
+/*        Connection connection = DatabaseConnection.getConnection();
 
         // Use the connection to execute SQL queries and interact with the database
         try {
@@ -47,6 +51,18 @@ public class SoundScape {
                 }
             }
         }
+         */
+        Artist artist = new Artist(1, "Adele");
+        Genere genere = new Genere(3, "Pop");
+        SongDao songDao = new SongDao();
+        Song song = new Song(
+                "Test", 2023, 430, artist, genere
+        );
+        songDao.saveStudent(song);
 
+        List< Song> songs = songDao.getSongs();
+        for (Song s : songs) {
+            System.out.println(s.getTitulo());
+        }
     }
 }

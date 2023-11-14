@@ -1,7 +1,11 @@
-package modelos;
+package com.gccg.soundscape.modelos;
 
 import jakarta.persistence.*;
+import java.util.List;
 
+
+@Entity
+@Table(name = "artist")
 public class Artist {
 
     @Id
@@ -45,7 +49,7 @@ public class Artist {
         return songs;
     }
 
-    public void setSongs(<any>  songs) {
+    public void setSongs(List<Song>  songs) {
         this.songs = songs;
     }
 

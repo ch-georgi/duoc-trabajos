@@ -1,2 +1,7 @@
-C:\Users\Administrador\Documents\NetBeansProjects\soundScape\soundScape\src\main\java\com\gccg\soundscape\SoundScape.java
-C:\Users\Administrador\Documents\NetBeansProjects\soundScape\soundScape\src\main\java\com\gccg\soundscape\DatabaseConnection.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/DatabaseConnection.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/Song.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/dao/SongDao.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/SoundScape.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/Artist.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/HibernateUtil.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/Genere.java
