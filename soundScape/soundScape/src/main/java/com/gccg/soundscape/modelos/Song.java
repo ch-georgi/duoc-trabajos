@@ -89,5 +89,15 @@ public class Song {
         this.genere = genero;
     }
     
-    
+    @Override
+    public String toString(){
+        String songDetalle =
+                "ID =" + this.getId() + "\n" +
+                "Título =" + this.getTitulo() + "\n" +
+                "Año =" + this.getAnio() + "\n" +
+                "Artista =" + this.getArtista().getNombre() + "\n" +
+                "Género =" + this.getGenero().getGenero() + "\n" +
+                "Duración =" + this.getDuracion();
+        return songDetalle;
+    }
 }

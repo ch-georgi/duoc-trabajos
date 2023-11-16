@@ -58,11 +58,26 @@ public class SoundScape {
         Song song = new Song(
                 "Test", 2023, 430, artist, genere
         );
-        songDao.saveStudent(song);
+        //songDao.saveStudent(song);
 
         List< Song> songs = songDao.getSongs();
         for (Song s : songs) {
-            System.out.println(s.getTitulo());
+            System.out.println(s.toString());
+        }
+        
+        /*songs = songDao.getSongsByTitulo("Test");
+        for (Song s : songs) {
+            System.out.println(s.toString());
+            
+        }*/
+        System.out.println("===============");
+        Song testSearch = songDao.getById(4);
+        System.out.println(testSearch.toString());
+        System.out.println("===============");
+        songDao.deleteById(4);
+        List<Song> newList = songDao.getSongs();
+        for (Song s : newList) {
+            System.out.println(s.toString());
         }
     }
 }

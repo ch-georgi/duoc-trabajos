@@ -34,7 +34,55 @@ public class SongDao {
 
     public List < Song > getSongs() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from S  ong", Song.class).list();
+            return session.createQuery("from Song", Song.class).list();
+        }
+    }
+    
+    public List < Song > getSongsByTitulo(String titulo){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Song where titulo = '" + titulo + "'", Song.class).list();
+        }
+    }
+    
+    public Song getById(int id){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.get(Song.class, id);
+        }
+    }
+    
+    public Boolean deleteById(int id){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            session.delete(this.getById(id));
+            session.getTransaction().commit();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    
+    public Boolean updateSong(Song song){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            session.update(song);
+            session.getTransaction().commit();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    
+    public Boolean replaceSong(Song song){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            session.saveOrUpdate(song);
+            session.getTransaction().commit();
+            return true;
+        }
+        catch(Exception e){
+            return false;
         }
     }
 }

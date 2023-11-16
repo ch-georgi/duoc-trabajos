@@ -1,7 +1,6 @@
 com/gccg/soundscape/SoundScape.class
-com/gccg/soundscape/dao/SongDao.class
-com/gccg/soundscape/modelos/Artist.class
 com/gccg/soundscape/HibernateUtil.class
 com/gccg/soundscape/modelos/Genere.class
+com/gccg/soundscape/dao/SongDao.class
 com/gccg/soundscape/modelos/Song.class
-com/gccg/soundscape/DatabaseConnection.class
+com/gccg/soundscape/modelos/Artist.class
