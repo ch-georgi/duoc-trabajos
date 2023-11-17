@@ -55,6 +55,8 @@ public class SoundScape {
         Artist artist = new Artist(1, "Adele");
         Genere genere = new Genere(3, "Pop");
         SongDao songDao = new SongDao();
+        ArtistDao artistDao = new ArtistDao();
+        GenereDao genereDao = new GenereDao();
         Song song = new Song(
                 "Test", 2023, 430, artist, genere
         );
@@ -71,13 +73,15 @@ public class SoundScape {
             
         }*/
         System.out.println("===============");
-        Song testSearch = songDao.getById(4);
-        System.out.println(testSearch.toString());
-        System.out.println("===============");
-        songDao.deleteById(4);
-        List<Song> newList = songDao.getSongs();
-        for (Song s : newList) {
-            System.out.println(s.toString());
+        System.out.println("===============\nArtistas");
+        List<Artist> artists = artistDao.getArtists();
+        for(Artist a : artists){
+            System.out.println(a.toString());
+        }
+        System.out.println("===============\nGeneros");
+        List<Genere> generes = genereDao.getGeneres();
+        for(Genere g : generes){
+            System.out.println(g.toString());
         }
     }
 }

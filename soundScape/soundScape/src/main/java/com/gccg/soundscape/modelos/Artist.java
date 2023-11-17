@@ -52,5 +52,13 @@ public class Artist {
     public void setSongs(List<Song>  songs) {
         this.songs = songs;
     }
+    
+    @Override
+    public String toString(){
+        String artistDetalle =
+                "ID =" + this.getId() + "\n" +
+                "Nombre =" + this.getNombre();
+        return artistDetalle;
+    }
 
 }

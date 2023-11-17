@@ -1,5 +1,4 @@
-/*
- */
+
 package com.gccg.soundscape.dao;
 
 import java.util.List;
@@ -7,21 +6,20 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.gccg.soundscape.modelos.Song;
+import com.gccg.soundscape.modelos.Genere;
 import com.gccg.soundscape.HibernateUtil;
-
 /**
  *
  * @author christophermaxgeorgipedrero
  */
-public class SongDao {
-    public void saveSong(Song song) {
+public class GenereDao {
+    public void saveGenere(Genere genere) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.save(song);
+            session.save(genere);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
@@ -31,22 +29,22 @@ public class SongDao {
             e.printStackTrace();
         }
     }
-
-    public List < Song > getSongs() {
+    
+    public List < Genere > getGeneres() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Song", Song.class).list();
+            return session.createQuery("from Genere", Genere.class).list();
         }
     }
     
-    public List < Song > getSongsByTitulo(String titulo){
+    public List < Genere > getGenereByNombre(String nombre){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Song where titulo = '" + titulo + "'", Song.class).list();
+            return session.createQuery("from Genere where genero = '" + nombre + "'", Genere.class).list();
         }
     }
     
-    public Song getById(int id){
+    public Genere getById(int id){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Song.class, id);
+            return session.get(Genere.class, id);
         }
     }
     
@@ -62,10 +60,10 @@ public class SongDao {
         }
     }
     
-    public Boolean updateSong(Song song){
+    public Boolean updateGenere(Genere genere){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.update(song);
+            session.update(genere);
             session.getTransaction().commit();
             return true;
         }
@@ -74,10 +72,10 @@ public class SongDao {
         }
     }
     
-    public Boolean replaceSong(Song song){
+    public Boolean replaceGenere(Genere genere){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.saveOrUpdate(song);
+            session.saveOrUpdate(genere);
             session.getTransaction().commit();
             return true;
         }

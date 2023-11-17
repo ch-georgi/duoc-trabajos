@@ -51,5 +51,13 @@ public class Genere {
     public void setSongs(List<Song>  songs) {
         this.songs = songs;
     }
+    
+    @Override
+    public String toString(){
+        String artistDetalle =
+                "ID =" + this.getId() + "\n" +
+                "Nombre género =" + this.getGenero();
+        return artistDetalle;
+    }
 
 }
