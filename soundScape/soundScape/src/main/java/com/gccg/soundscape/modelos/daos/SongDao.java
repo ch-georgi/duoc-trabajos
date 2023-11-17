@@ -1,6 +1,6 @@
 /*
  */
-package com.gccg.soundscape.dao;
+package com.gccg.soundscape.modelos.daos;
 
 import java.util.List;
 

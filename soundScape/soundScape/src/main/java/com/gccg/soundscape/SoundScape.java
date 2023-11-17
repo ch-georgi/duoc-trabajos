@@ -1,12 +1,14 @@
 package com.gccg.soundscape;
 
+import com.gccg.soundscape.modelos.daos.ArtistDao;
+import com.gccg.soundscape.modelos.daos.GenereDao;
+import com.gccg.soundscape.modelos.daos.SongDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.gccg.soundscape.modelos.*;
-import com.gccg.soundscape.dao.*;
 import java.util.List;
 
 /**
