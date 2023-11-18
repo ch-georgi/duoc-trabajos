@@ -1,3 +1,5 @@
+clic secundario + shift en carpeta> abrir ventana de powershell aqui
+
 git fetch
 git pull origen master
 git add .
