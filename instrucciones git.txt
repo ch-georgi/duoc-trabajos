@@ -1,0 +1,5 @@
+git fetch
+git pull origen master
+git add .
+git commit -m "texto del mensaje"
+git push origen master
