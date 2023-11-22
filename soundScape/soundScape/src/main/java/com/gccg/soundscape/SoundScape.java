@@ -53,7 +53,7 @@ public class SoundScape {
                 }
             }
         }
-         */
+         
         Artist artist = new Artist(1, "Adele");
         Genere genere = new Genere(3, "Pop");
         SongDao songDao = new SongDao();
@@ -69,11 +69,11 @@ public class SoundScape {
             System.out.println(s.toString());
         }
         
-        /*songs = songDao.getSongsByTitulo("Test");
+        songs = songDao.getSongsByTitulo("Test");
         for (Song s : songs) {
             System.out.println(s.toString());
             
-        }*/
+        }
         System.out.println("===============");
         System.out.println("===============\nArtistas");
         List<Artist> artists = artistDao.getArtists();
@@ -84,6 +84,6 @@ public class SoundScape {
         List<Genere> generes = genereDao.getGeneres();
         for(Genere g : generes){
             System.out.println(g.toString());
-        }
+        }*/
     }
 }
