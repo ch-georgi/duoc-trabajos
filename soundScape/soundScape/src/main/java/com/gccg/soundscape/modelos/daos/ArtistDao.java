@@ -34,18 +34,24 @@ public class ArtistDao {
     public List < Artist > getArtists() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Artist", Artist.class).list();
+        }catch(Exception e){
+            return null;
         }
     }
     
     public List < Artist > getArtistByNombre(String nombre){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Artist where nombre = '" + nombre + "'", Artist.class).list();
+            return session.createQuery("from Artist where upper(nombre) like '%" + nombre + "%'", Artist.class).list();
+        }catch(Exception e){
+            return null;
         }
     }
     
     public Artist getById(int id){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Artist.class, id);
+        }catch(Exception e){
+            return null;
         }
     }
     

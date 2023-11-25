@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.gccg.soundscape.modelos.*;
+import com.gccg.soundscape.vistas.MenuPrincipal;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 
 /**
@@ -85,5 +88,10 @@ public class SoundScape {
         for(Genere g : generes){
             System.out.println(g.toString());
         }*/
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setLocation(dim.width/2-menu.getSize().width/2, dim.height/2-menu.getSize().height/2);
+        menu.setVisible(true);
     }
 }

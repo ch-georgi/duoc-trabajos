@@ -55,10 +55,7 @@ public class Artist {
     
     @Override
     public String toString(){
-        String artistDetalle =
-                "ID =" + this.getId() + "\n" +
-                "Nombre =" + this.getNombre();
-        return artistDetalle;
+        return this.getNombre();
     }
 
 }

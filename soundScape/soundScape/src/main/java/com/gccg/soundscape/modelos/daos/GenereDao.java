@@ -38,7 +38,7 @@ public class GenereDao {
     
     public List < Genere > getGenereByNombre(String nombre){
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from Genere where genero = '" + nombre + "'", Genere.class).list();
+            return session.createQuery("from Genere where upper(genero) like '%" + nombre + "%'", Genere.class).list();
         }
     }
     

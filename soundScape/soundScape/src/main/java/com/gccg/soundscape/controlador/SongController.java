@@ -34,4 +34,20 @@ public class SongController {
             return false;
         }
     }
+    
+    public List<Song> buscarCancionPorTitulo(String titulo){
+        try{
+            return this.dao.getSongsByTituloLike(titulo); 
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
+    public Song buscarCancionPorId(int id){
+        try{
+            return this.dao.getById(id);
+        }catch(Exception e){
+            return null;
+        }
+    }
 }
