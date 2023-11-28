@@ -163,6 +163,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        listElementos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(listElementos);
 
         btnAtras.setText("Atrás");

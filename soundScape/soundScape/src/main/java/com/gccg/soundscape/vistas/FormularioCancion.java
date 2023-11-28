@@ -36,17 +36,17 @@ public class FormularioCancion extends javax.swing.JFrame {
         
         ArtistController ac = new ArtistController();
         List<Artist> artistList = ac.listarArtistas();
-        this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
-        this.listArtistas.revalidate();
-        this.listArtistas.repaint();
+        this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<Artist>(artistList.toArray(new Artist[0])));
+        //this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
         this.listArtistas.setSelectedItem(cancion.getArtista());
         
         GenereController gc = new GenereController();
         List<Genere> genereList = gc.listarGeneros();
-        this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
-        this.listGeneros.revalidate();
-        this.listGeneros.repaint();
+        System.out.println(genereList);
+        //this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
+        this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<Genere>(genereList.toArray(new Genere[0])));
         this.listGeneros.setSelectedItem(cancion.getGenero());
+        
         
         this.txtFldAnno.setText(Integer.toString(cancion.getAnio()));
         this.txtFldTitulo.setText(cancion.getTitulo());
