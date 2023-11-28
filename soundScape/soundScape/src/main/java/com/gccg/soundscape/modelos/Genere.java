@@ -54,10 +54,7 @@ public class Genere {
     
     @Override
     public String toString(){
-        String artistDetalle =
-                "ID =" + this.getId() + "\n" +
-                "Nombre género =" + this.getGenero();
-        return artistDetalle;
+        return this.getGenero();
     }
 
 }

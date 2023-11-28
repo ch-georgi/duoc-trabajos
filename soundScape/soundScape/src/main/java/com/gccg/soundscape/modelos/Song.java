@@ -91,13 +91,6 @@ public class Song {
     
     @Override
     public String toString(){
-        String songDetalle =
-                "ID =" + this.getId() + "\n" +
-                "Título =" + this.getTitulo() + "\n" +
-                "Año =" + this.getAnio() + "\n" +
-                "Artista =" + this.getArtista().getNombre() + "\n" +
-                "Género =" + this.getGenero().getGenero() + "\n" +
-                "Duración =" + this.getDuracion();
-        return songDetalle;
+        return this.getTitulo();
     }
 }

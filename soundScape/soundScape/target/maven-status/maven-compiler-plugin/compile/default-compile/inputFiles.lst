@@ -5,6 +5,7 @@
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/vistas/ListaDeElementos.java
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/controlador/ArtistController.java
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/vistas/FormularioGenero.java
+/home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/controlador/GenereController.java
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/daos/SongDao.java
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/Song.java
 /home/christophermaxgeorgipedrero/Escritorio/PRJ/soundScape/soundScape/src/main/java/com/gccg/soundscape/modelos/daos/GenereDao.java

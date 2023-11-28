@@ -40,6 +40,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBtnCancion.setText("Canción");
         menuBtnCancion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menuBtnCancion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuBtnCancionClicked(evt);
+            }
+        });
 
         menuBtnArtista.setText("Artista");
         menuBtnArtista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -51,6 +56,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         menuBtnGenero.setText("Género");
         menuBtnGenero.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        menuBtnGenero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuBtnGeneroClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,10 +98,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
-        
-        
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_menuBtnArtistaClicked
+
+    private void menuBtnCancionClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBtnCancionClicked
+        // TODO add your handling code here:
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION,"Canciones");
+        lista.setSize(440, 320);
+        lista.setLocationRelativeTo(null);
+        lista.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuBtnCancionClicked
+
+    private void menuBtnGeneroClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBtnGeneroClicked
+        // TODO add your handling code here:
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO,"Generos");
+        lista.setSize(440, 320);
+        lista.setLocationRelativeTo(null);
+        lista.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuBtnGeneroClicked
 
     /**
      * @param args the command line arguments

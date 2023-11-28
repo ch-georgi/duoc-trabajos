@@ -2,12 +2,17 @@
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.controlador.ArtistController;
+import com.gccg.soundscape.controlador.GenereController;
 import com.gccg.soundscape.controlador.SongController;
 import com.gccg.soundscape.modelos.Artist;
 import com.gccg.soundscape.modelos.Song;
+import static com.gccg.soundscape.vistas.TipoLista.ARTISTA;
+import static com.gccg.soundscape.vistas.TipoLista.CANCION;
+import static com.gccg.soundscape.vistas.TipoLista.GENERO;
 import java.awt.HeadlessException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,20 +42,33 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
         DefaultListModel<Object> listModel = new DefaultListModel<>();
 
-        if (this.tipo == TipoLista.ARTISTA) {
-            ArtistController ac = new ArtistController();
-            Object[] artistArray = ac.listarArtistas().toArray();
-            this.listElementos.setListData(artistArray);  // En lugar de crear una nueva JList
-            this.listElementos.revalidate();
-            this.listElementos.repaint();
-            this.tituloListaElementos.setText("Lista de artistas");
-        } else if (this.tipo == TipoLista.CANCION) {
-            SongController sc = new SongController();
-            Object[] songArray = sc.listarCanciones().toArray();
-            this.listElementos.setListData(songArray);  // En lugar de crear una nueva JList
-            this.listElementos.revalidate();
-            this.listElementos.repaint();
-            this.tituloListaElementos.setText("Lista de canciones");
+        switch (this.tipo) {
+            case ARTISTA:
+                ArtistController ac = new ArtistController();
+                Object[] artistArray = ac.listarArtistas().toArray();
+                this.listElementos.setListData(artistArray);
+                this.listElementos.revalidate();
+                this.listElementos.repaint();
+                this.tituloListaElementos.setText("Lista de artistas");
+                break;
+            case CANCION:
+                SongController sc = new SongController();
+                Object[] songArray = sc.listarCanciones().toArray();
+                this.listElementos.setListData(songArray);
+                this.listElementos.revalidate();
+                this.listElementos.repaint();
+                this.tituloListaElementos.setText("Lista de canciones");
+                break;
+            case GENERO:
+                GenereController gc = new GenereController();
+                Object[] genereArray = gc.listarGeneros().toArray();
+                this.listElementos.setListData(genereArray);
+                this.listElementos.revalidate();
+                this.listElementos.repaint();
+                this.tituloListaElementos.setText("Lista de generos");
+                break;
+            default:
+                break;
         }
         System.out.println("Contenido del modelo: " + listModel);
 
@@ -76,6 +94,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listElementos = new javax.swing.JList<>();
+        btnAtras = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -146,6 +165,18 @@ public class ListaDeElementos extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(listElementos);
 
+        btnAtras.setText("Atrás");
+        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicAtras(evt);
+            }
+        });
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,11 +202,17 @@ public class ListaDeElementos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(40, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAtras)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnAtras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(tituloListaElementos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,23 +242,39 @@ public class ListaDeElementos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void clicModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicModificar
-        // TODO add your handling code here:
-         if(this.tipo == TipoLista.ARTISTA){
-            Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
-            FormularioArtista formArts = new FormularioArtista("Modificando artista "+selectedArtist.getNombre());
-            formArts.getTxtFldNombre().setText(selectedArtist.getNombre());
-            formArts.setIdModificacion(selectedArtist.getId());
-            formArts.setLocationRelativeTo(null);
-            formArts.setVisible(true);
-            this.setVisible(false);
-        } else if(this.tipo == TipoLista.CANCION){
-            Song selectedSong = (Song) this.listElementos.getSelectedValue();
-            FormularioCancion formCanc = new FormularioCancion(
-                    
-            );
-            //"Modificando cancion '"+ selectedSong.getTitulo()+"'"
-        } else if(this.tipo == TipoLista.GENERO){
+        if(this.listElementos.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(ListaDeElementos.this,
+                            "Por favor, selecciona un elemento a modificar.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+        }else{
+            switch (this.tipo) {
+            case ARTISTA:
+                Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
+                FormularioArtista formArts = new FormularioArtista("Modificando artista "+
+                        selectedArtist.getNombre());
+                formArts.getTxtFldNombre().setText(selectedArtist.getNombre());
+                formArts.setIdModificacion(selectedArtist.getId());
+                formArts.setLocationRelativeTo(null);
+                formArts.setVisible(true);
+                dispose();
+                break;
+            case CANCION:
+                Song selectedSong = (Song) this.listElementos.getSelectedValue();
+                FormularioCancion formCanc = new FormularioCancion(selectedSong,
+                        "Modificando cancion '"+
+                                selectedSong.getTitulo()+"'");
+                formCanc.setLocationRelativeTo(null);
+                formCanc.setVisible(true);
+                dispose();
+                break;
+            case GENERO:
+                break;
+            default:
+                break;
         }
+        }
+        
     }//GEN-LAST:event_clicModificar
 
     private void clicEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicEliminar
@@ -239,6 +292,18 @@ public class ListaDeElementos extends javax.swing.JFrame {
     private void teclaEnterBuscar(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teclaEnterBuscar
         // TODO add your handling code here:
     }//GEN-LAST:event_teclaEnterBuscar
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
+        // TODO add your handling code here:
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_clicAtras
 
     /**
      * @param args the command line arguments
@@ -278,6 +343,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
