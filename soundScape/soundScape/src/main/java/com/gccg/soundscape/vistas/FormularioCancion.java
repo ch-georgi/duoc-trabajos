@@ -4,6 +4,17 @@
  */
 package com.gccg.soundscape.vistas;
 
+import com.gccg.soundscape.controlador.ArtistController;
+import com.gccg.soundscape.controlador.GenereController;
+import com.gccg.soundscape.controlador.SongController;
+import com.gccg.soundscape.modelos.Artist;
+import com.gccg.soundscape.modelos.Genere;
+import com.gccg.soundscape.modelos.Song;
+import java.awt.HeadlessException;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author UTEM
@@ -16,6 +27,51 @@ public class FormularioCancion extends javax.swing.JFrame {
     public FormularioCancion() {
         initComponents();
     }
+
+    //Modificar
+    public FormularioCancion(List<Artist> listArtistas, List<Genere> listGeneros, Song cancion, String title) throws HeadlessException {
+        super(title);
+        initComponents();
+        
+        ArtistController ac = new ArtistController();
+        List<Artist> artistList = ac.listarArtistas();
+        this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
+        this.listArtistas.revalidate();
+        this.listArtistas.repaint();
+        this.listArtistas.setSelectedItem(cancion.getArtista());
+        
+        GenereController gc = new GenereController();
+        List<Genere> genereList = gc.listarGeneros();
+        this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
+        this.listGeneros.revalidate();
+        this.listGeneros.repaint();
+        this.listGeneros.setSelectedItem(cancion.getGenero());
+        
+        this.txtFldAnno.setText(Integer.toString(cancion.getAnio()));
+        this.txtFldTitulo.setText(cancion.getTitulo());
+        this.txtFldDuracion.setText(Integer.toString(cancion.getDuracion()));
+        
+    }
+
+    //Nuevo registro
+    public FormularioCancion(String title) throws HeadlessException {
+        super(title);
+        initComponents();
+        
+        ArtistController ac = new ArtistController();
+        List<Artist> artistList = ac.listarArtistas();
+        this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
+        this.listArtistas.revalidate();
+        this.listArtistas.repaint();
+        
+        GenereController gc = new GenereController();
+        List<Genere> genereList = gc.listarGeneros();
+        this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
+        this.listGeneros.revalidate();
+        this.listGeneros.repaint();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +92,8 @@ public class FormularioCancion extends javax.swing.JFrame {
         txtFldAnno = new javax.swing.JTextField();
         listArtistas = new javax.swing.JComboBox<>();
         listGeneros = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtFldDuracion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,9 +111,7 @@ public class FormularioCancion extends javax.swing.JFrame {
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        listArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        listGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("Duración");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,37 +121,47 @@ public class FormularioCancion extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFldAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFldTitulo)
-                                    .addComponent(listArtistas, 0, 197, Short.MAX_VALUE)
-                                    .addComponent(listGeneros, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(70, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 271, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(31, 31, 31)
+                                .addComponent(listArtistas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel13)
+                                            .addComponent(jLabel14))
+                                        .addGap(31, 31, 31))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(20, 20, 20)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtFldDuracion)
+                                    .addComponent(txtFldAnno, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtFldTitulo)
+                                            .addComponent(listGeneros, 0, 197, Short.MAX_VALUE))))))
+                        .addContainerGap(70, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(txtFldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(listArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jLabel1)
+                    .addComponent(txtFldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtFldAnno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -103,11 +169,15 @@ public class FormularioCancion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(listGeneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(listArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
                     .addComponent(btnAgregar))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,13 +222,15 @@ public class FormularioCancion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregar;
     public javax.swing.JButton btnLimpiar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    public javax.swing.JComboBox<String> listArtistas;
-    public javax.swing.JComboBox<String> listGeneros;
+    public javax.swing.JComboBox<Artist> listArtistas;
+    public javax.swing.JComboBox<Genere> listGeneros;
     public javax.swing.JTextField txtFldAnno;
+    private javax.swing.JTextField txtFldDuracion;
     public javax.swing.JTextField txtFldTitulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.controlador.ArtistController;
 import com.gccg.soundscape.controlador.SongController;
 import com.gccg.soundscape.modelos.Artist;
+import com.gccg.soundscape.modelos.Song;
 import java.awt.HeadlessException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -108,6 +106,11 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicEliminar(evt);
+            }
+        });
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -116,9 +119,25 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
         btnAgregar.setText("Agregar");
         btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicAgregar(evt);
+            }
+        });
+
+        txtFldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                teclaEnterBuscar(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
         btnBuscar.setToolTipText("");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicBuscar(evt);
+            }
+        });
 
         listElementos.setModel(new javax.swing.AbstractListModel<Object>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -195,8 +214,31 @@ public class ListaDeElementos extends javax.swing.JFrame {
             formArts.setLocationRelativeTo(null);
             formArts.setVisible(true);
             this.setVisible(false);
+        } else if(this.tipo == TipoLista.CANCION){
+            Song selectedSong = (Song) this.listElementos.getSelectedValue();
+            FormularioCancion formCanc = new FormularioCancion(
+                    
+            );
+            //"Modificando cancion '"+ selectedSong.getTitulo()+"'"
+        } else if(this.tipo == TipoLista.GENERO){
         }
     }//GEN-LAST:event_clicModificar
+
+    private void clicEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicEliminar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clicEliminar
+
+    private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clicAgregar
+
+    private void clicBuscar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicBuscar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clicBuscar
+
+    private void teclaEnterBuscar(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teclaEnterBuscar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teclaEnterBuscar
 
     /**
      * @param args the command line arguments

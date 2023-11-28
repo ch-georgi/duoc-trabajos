@@ -34,4 +34,12 @@ public class ArtistController {
             return false;
         }
     }
+    
+    public Artist buscarArtistaPorId(int id){
+        try{
+            return this.dao.getById(id);
+        }catch(Exception e){
+            return null;
+        }
+    }
 }
