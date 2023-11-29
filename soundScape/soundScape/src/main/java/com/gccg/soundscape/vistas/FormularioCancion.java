@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.controlador.ArtistController;
@@ -26,32 +23,38 @@ public class FormularioCancion extends javax.swing.JFrame {
      * Creates new form VistaPrincipal
      */
     public FormularioCancion() {
+        super("Agregar canción");
         initComponents();
+        ArtistController ac = new ArtistController();
+        List<Artist> artistList = ac.listarArtistas();
+        this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(artistList.toArray(new Artist[0])));
+        GenereController gc = new GenereController();
+        List<Genere> genereList = gc.listarGeneros();
+        System.out.println(genereList);
+        this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(genereList.toArray(new Genere[0])));
     }
 
     //Modificar
     public FormularioCancion(Song cancion, String title) throws HeadlessException {
         super(title);
         initComponents();
-        
+        this.idModificacion = cancion.getId();
         ArtistController ac = new ArtistController();
         List<Artist> artistList = ac.listarArtistas();
-        this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<Artist>(artistList.toArray(new Artist[0])));
-        //this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
+        this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(artistList.toArray(new Artist[0])));
         this.listArtistas.setSelectedItem(cancion.getArtista());
         
         GenereController gc = new GenereController();
         List<Genere> genereList = gc.listarGeneros();
         System.out.println(genereList);
-        //this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
-        this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<Genere>(genereList.toArray(new Genere[0])));
+        this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(genereList.toArray(new Genere[0])));
         this.listGeneros.setSelectedItem(cancion.getGenero());
-        
-        
+
         this.txtFldAnno.setText(Integer.toString(cancion.getAnio()));
         this.txtFldTitulo.setText(cancion.getTitulo());
         this.txtFldDuracion.setText(Integer.toString(cancion.getDuracion()));
         this.idModificacion = cancion.getId();
+        this.btnLimpiar.setEnabled(false);
     }
 
     //Nuevo registro
@@ -72,7 +75,13 @@ public class FormularioCancion extends javax.swing.JFrame {
         this.listGeneros.repaint();
     }
     
-    
+    private void atras(){
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION,"Canciones");
+        lista.setSize(440, 320);
+        lista.setLocationRelativeTo(null);
+        lista.setVisible(true);
+        dispose();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,6 +118,11 @@ public class FormularioCancion extends javax.swing.JFrame {
 
         btnAgregar.setText("Agregar");
         btnAgregar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicAgregar(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -134,9 +148,7 @@ public class FormularioCancion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel12)
@@ -208,11 +220,27 @@ public class FormularioCancion extends javax.swing.JFrame {
 
     private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
         // TODO add your handling code here:
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
-        dispose();
+        this.atras();
     }//GEN-LAST:event_clicAtras
+
+    private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
+        // TODO add your handling code here:
+        Genere genero = (Genere) this.listGeneros.getSelectedItem();
+        Artist artista = (Artist) this.listArtistas.getSelectedItem();
+        Song cancion = new Song(
+        this.txtFldTitulo.getText(),
+                Integer.parseInt(this.txtFldAnno.getText()),
+                Integer.parseInt(this.txtFldDuracion.getText()),
+                artista,genero
+        );
+        SongController sc = new SongController();
+        if(this.idModificacion == 0){
+            sc.crearCancion(cancion);
+        } else {
+            sc.actualizarCancion(this.idModificacion, cancion);
+        }
+        this.atras();
+    }//GEN-LAST:event_clicAgregar
 
     /**
      * @param args the command line arguments

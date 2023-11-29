@@ -1,19 +1,32 @@
 
 package com.gccg.soundscape.vistas;
 
+import com.gccg.soundscape.modelos.Genere;
+import java.awt.HeadlessException;
+
 /**
  *
  * @author UTEM
  */
 public class FormularioGenero extends javax.swing.JFrame {
 
+    private int idModificacion;
     /**
      * Creates new form FormularioArtista
      */
     public FormularioGenero() {
+        super("Agregar género");
         initComponents();
     }
 
+    //Modificacion
+    public FormularioGenero(String title, Genere genero) throws HeadlessException {
+        super(title);
+        initComponents();
+        this.txtFldGenero.setText(genero.getGenero());
+        this.idModificacion = genero.getId();
+        this.btnLimpiar.setEnabled(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +39,7 @@ public class FormularioGenero extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtFldGenero = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
 
@@ -57,7 +70,7 @@ public class FormularioGenero extends javax.swing.JFrame {
                             .addComponent(btnLimpiar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnGuardar))
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -82,7 +95,7 @@ public class FormularioGenero extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnAtras)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
@@ -95,9 +108,10 @@ public class FormularioGenero extends javax.swing.JFrame {
 
     private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
         // TODO add your handling code here:
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO,"Generos");
+        lista.setSize(440, 320);
+        lista.setLocationRelativeTo(null);
+        lista.setVisible(true);
         dispose();
     }//GEN-LAST:event_clicAtras
 
@@ -143,6 +157,6 @@ public class FormularioGenero extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtFldGenero;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,6 +15,7 @@ com/gccg/soundscape/vistas/ListaDeElementos$12.class
 com/gccg/soundscape/vistas/FormularioCancion$1.class
 com/gccg/soundscape/vistas/ListaDeElementos$3.class
 com/gccg/soundscape/modelos/daos/SongDao.class
+com/gccg/soundscape/vistas/FormularioCancion$4.class
 com/gccg/soundscape/controlador/SongController.class
 com/gccg/soundscape/vistas/MenuPrincipal$1.class
 com/gccg/soundscape/modelos/daos/ArtistDao.class

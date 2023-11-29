@@ -4,6 +4,7 @@
  */
 package com.gccg.soundscape.vistas;
 
+import com.gccg.soundscape.modelos.Artist;
 import java.awt.HeadlessException;
 import javax.swing.JTextField;
 
@@ -18,9 +19,17 @@ public class FormularioArtista extends javax.swing.JFrame {
      * Creates new form FormularioArtista
      */
     public FormularioArtista() {
+        super("Agregar artista");
         initComponents();
     }
 
+    private void atras(){
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.ARTISTA,"Artistas");
+        lista.setSize(440, 320);
+        lista.setLocationRelativeTo(null);
+        lista.setVisible(true);
+        dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,10 +129,7 @@ public class FormularioArtista extends javax.swing.JFrame {
 
     private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
         // TODO add your handling code here:
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
-        dispose();
+        this.atras();
     }//GEN-LAST:event_clicAtras
 
     /**
@@ -161,9 +167,13 @@ public class FormularioArtista extends javax.swing.JFrame {
         });
     }
 
-    public FormularioArtista(String title) throws HeadlessException {
+    //Modificacion
+    public FormularioArtista(String title, Artist artista) throws HeadlessException {
         super(title);
         initComponents();
+        this.txtFldNombre.setText(artista.getNombre());
+        this.idModificacion = artista.getId();
+        this.btnLimpiar.setEnabled(false);
     }
 
     public JTextField getTxtFldNombre() {

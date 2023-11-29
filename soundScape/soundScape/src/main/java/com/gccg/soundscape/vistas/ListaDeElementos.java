@@ -5,6 +5,7 @@ import com.gccg.soundscape.controlador.ArtistController;
 import com.gccg.soundscape.controlador.GenereController;
 import com.gccg.soundscape.controlador.SongController;
 import com.gccg.soundscape.modelos.Artist;
+import com.gccg.soundscape.modelos.Genere;
 import com.gccg.soundscape.modelos.Song;
 import static com.gccg.soundscape.vistas.TipoLista.ARTISTA;
 import static com.gccg.soundscape.vistas.TipoLista.CANCION;
@@ -70,7 +71,6 @@ public class ListaDeElementos extends javax.swing.JFrame {
             default:
                 break;
         }
-        System.out.println("Contenido del modelo: " + listModel);
 
     }
 
@@ -253,9 +253,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
             case ARTISTA:
                 Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
                 FormularioArtista formArts = new FormularioArtista("Modificando artista "+
-                        selectedArtist.getNombre());
-                formArts.getTxtFldNombre().setText(selectedArtist.getNombre());
-                formArts.setIdModificacion(selectedArtist.getId());
+                        selectedArtist.getNombre(),selectedArtist);
                 formArts.setLocationRelativeTo(null);
                 formArts.setVisible(true);
                 dispose();
@@ -270,6 +268,12 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 dispose();
                 break;
             case GENERO:
+                Genere selectedGenere = (Genere) this.listElementos.getSelectedValue();
+                FormularioGenero formGen = new FormularioGenero("Modificando genero "+
+                        selectedGenere.getGenero(),selectedGenere);
+                formGen.setLocationRelativeTo(null);
+                formGen.setVisible(true);
+                dispose();
                 break;
             default:
                 break;
@@ -284,6 +288,28 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
     private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
         // TODO add your handling code here:
+        switch (this.tipo) {
+            case ARTISTA:
+                FormularioArtista formArts = new FormularioArtista();
+                formArts.setLocationRelativeTo(null);
+                formArts.setVisible(true);
+                dispose();
+                break;
+            case CANCION:
+                FormularioCancion formCanc = new FormularioCancion();
+                formCanc.setLocationRelativeTo(null);
+                formCanc.setVisible(true);
+                dispose();
+                break;
+            case GENERO:
+                FormularioGenero formGen = new FormularioGenero();
+                formGen.setLocationRelativeTo(null);
+                formGen.setVisible(true);
+                dispose();
+                break;
+            default:
+                break;
+        }
     }//GEN-LAST:event_clicAgregar
 
     private void clicBuscar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicBuscar

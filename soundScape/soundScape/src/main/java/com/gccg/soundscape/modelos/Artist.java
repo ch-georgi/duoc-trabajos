@@ -2,6 +2,7 @@ package com.gccg.soundscape.modelos;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -56,6 +57,23 @@ public class Artist {
     @Override
     public String toString(){
         return this.getNombre();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Artist other = (Artist) obj;
+        return id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
