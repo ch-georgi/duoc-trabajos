@@ -296,7 +296,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (this.listElementos.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(ListaDeElementos.this,
-                    "Por favor, selecciona un elemento a modificar.",
+                    "Por favor, selecciona un elemento a eliminar.",
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         } else {
