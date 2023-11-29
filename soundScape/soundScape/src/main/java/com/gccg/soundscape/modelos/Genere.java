@@ -28,6 +28,12 @@ public class Genere {
         this.genero = genero;
     }
 
+    public Genere(String genero) {
+        this.genero = genero;
+    }
+    
+    
+
     //Getters y Setters
     public int getId() {
         return id;

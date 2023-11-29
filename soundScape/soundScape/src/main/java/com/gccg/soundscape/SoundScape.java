@@ -3,6 +3,7 @@ package com.gccg.soundscape;
 import com.gccg.soundscape.vistas.MenuPrincipal;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.UIManager;
 
 /**
  *

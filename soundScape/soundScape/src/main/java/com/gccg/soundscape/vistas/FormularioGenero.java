@@ -1,8 +1,9 @@
-
 package com.gccg.soundscape.vistas;
 
+import com.gccg.soundscape.controlador.GenereController;
 import com.gccg.soundscape.modelos.Genere;
 import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,23 +12,28 @@ import java.awt.HeadlessException;
 public class FormularioGenero extends javax.swing.JFrame {
 
     private int idModificacion;
+    private final GenereController controller;
+
     /**
      * Creates new form FormularioArtista
      */
     public FormularioGenero() {
         super("Agregar género");
         initComponents();
+        this.controller = new GenereController();
     }
 
     //Modificacion
     public FormularioGenero(String title, Genere genero) throws HeadlessException {
         super(title);
         initComponents();
+        this.controller = new GenereController();
         this.txtFldGenero.setText(genero.getGenero());
         this.idModificacion = genero.getId();
         this.btnLimpiar.setEnabled(false);
         this.btnAgregar.setText("Modificar");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +51,7 @@ public class FormularioGenero extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -117,13 +124,16 @@ public class FormularioGenero extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
-        // TODO add your handling code here:
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO,"Generos");
+    private void atras() {
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO, "Generos");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
         dispose();
+    }
+    private void clicAtras(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAtras
+        // TODO add your handling code here:
+        this.atras();
     }//GEN-LAST:event_clicAtras
 
     private void clicLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicLimpiar
@@ -133,6 +143,29 @@ public class FormularioGenero extends javax.swing.JFrame {
 
     private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
         // TODO add your handling code here:
+        if (this.txtFldGenero.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(FormularioGenero.this,
+                    "Debe rellenar todos los campos antes de continuar.",
+                    "Existen campos vacío",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            Genere genero = new Genere(this.txtFldGenero.getText());
+            if (this.idModificacion != 0) {
+                genero.setId(this.idModificacion);
+                this.controller.actualizarGenero(genero);
+                JOptionPane.showMessageDialog(FormularioGenero.this,
+                        "Se ha modificado el género seleccionado.",
+                        "Género modificado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                this.controller.crearGenero(genero);
+                JOptionPane.showMessageDialog(FormularioGenero.this,
+                        "Se ha creado nuevo registro de género.",
+                        "Género creado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.atras();
+        }
     }//GEN-LAST:event_clicAgregar
 
     /**

@@ -1,8 +1,9 @@
-
 package com.gccg.soundscape.vistas;
 
+import com.gccg.soundscape.controlador.ArtistController;
 import com.gccg.soundscape.modelos.Artist;
 import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -12,21 +13,36 @@ import javax.swing.JTextField;
 public class FormularioArtista extends javax.swing.JFrame {
 
     private int idModificacion;
+    private final ArtistController controller;
+
     /**
      * Creates new form FormularioArtista
      */
     public FormularioArtista() {
         super("Agregar artista");
         initComponents();
+        this.controller = new ArtistController();
     }
 
-    private void atras(){
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.ARTISTA,"Artistas");
+    //Modificacion
+    public FormularioArtista(String title, Artist artista) throws HeadlessException {
+        super(title);
+        initComponents();
+        this.controller = new ArtistController();
+        this.txtFldNombre.setText(artista.getNombre());
+        this.idModificacion = artista.getId();
+        this.btnLimpiar.setEnabled(false);
+        this.btnAgregar.setText("Modificar");
+    }
+
+    private void atras() {
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.ARTISTA, "Artistas");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
         dispose();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +60,7 @@ public class FormularioArtista extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,6 +163,29 @@ public class FormularioArtista extends javax.swing.JFrame {
 
     private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
         // TODO add your handling code here:
+        if (this.txtFldNombre.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(FormularioArtista.this,
+                    "Debe rellenar todos los campos antes de continuar.",
+                    "Existen campos vacío",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            Artist artist = new Artist(this.txtFldNombre.getText());
+            if (this.idModificacion != 0) {
+                artist.setId(this.idModificacion);
+                this.controller.actualizarArtista(artist);
+                JOptionPane.showMessageDialog(FormularioArtista.this,
+                        "Se ha modificado el artista seleccionado.",
+                        "Artista modificado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                this.controller.crearArtista(artist);
+                JOptionPane.showMessageDialog(FormularioArtista.this,
+                        "Se ha creado nuevo registro de artista.",
+                        "Artista creado",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.atras();
+        }
     }//GEN-LAST:event_clicAgregar
 
     /**
@@ -183,16 +223,6 @@ public class FormularioArtista extends javax.swing.JFrame {
         });
     }
 
-    //Modificacion
-    public FormularioArtista(String title, Artist artista) throws HeadlessException {
-        super(title);
-        initComponents();
-        this.txtFldNombre.setText(artista.getNombre());
-        this.idModificacion = artista.getId();
-        this.btnLimpiar.setEnabled(false);
-        this.btnAgregar.setText("Modificar");
-    }
-
     public JTextField getTxtFldNombre() {
         return txtFldNombre;
     }
@@ -208,8 +238,7 @@ public class FormularioArtista extends javax.swing.JFrame {
     public void setIdModificacion(int idModificacion) {
         this.idModificacion = idModificacion;
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

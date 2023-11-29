@@ -1,4 +1,3 @@
-
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.controlador.ArtistController;
@@ -10,7 +9,11 @@ import com.gccg.soundscape.modelos.Song;
 import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -19,18 +22,23 @@ import javax.swing.JTextField;
 public class FormularioCancion extends javax.swing.JFrame {
 
     private int idModificacion;
+    private final SongController sc;
+    private final ArtistController ac;
+    private final GenereController gc;
+
     /**
      * Creates new form VistaPrincipal
      */
     public FormularioCancion() {
         super("Agregar canción");
         initComponents();
-        ArtistController ac = new ArtistController();
-        List<Artist> artistList = ac.listarArtistas();
+        this.iniciarAnnoDuracion();
+        this.sc = new SongController();
+        this.ac = new ArtistController();
+        this.gc = new GenereController();
+        List<Artist> artistList = this.ac.listarArtistas();
         this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(artistList.toArray(new Artist[0])));
-        GenereController gc = new GenereController();
-        List<Genere> genereList = gc.listarGeneros();
-        System.out.println(genereList);
+        List<Genere> genereList = this.gc.listarGeneros();
         this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(genereList.toArray(new Genere[0])));
     }
 
@@ -38,14 +46,17 @@ public class FormularioCancion extends javax.swing.JFrame {
     public FormularioCancion(Song cancion, String title) throws HeadlessException {
         super(title);
         initComponents();
+        this.sc = new SongController();
+        this.ac = new ArtistController();
+        this.gc = new GenereController();
+        this.iniciarAnnoDuracion();
+
         this.idModificacion = cancion.getId();
-        ArtistController ac = new ArtistController();
-        List<Artist> artistList = ac.listarArtistas();
+        List<Artist> artistList = this.ac.listarArtistas();
         this.listArtistas.setModel(new javax.swing.DefaultComboBoxModel<>(artistList.toArray(new Artist[0])));
         this.listArtistas.setSelectedItem(cancion.getArtista());
-        
-        GenereController gc = new GenereController();
-        List<Genere> genereList = gc.listarGeneros();
+
+        List<Genere> genereList = this.gc.listarGeneros();
         System.out.println(genereList);
         this.listGeneros.setModel(new javax.swing.DefaultComboBoxModel<>(genereList.toArray(new Genere[0])));
         this.listGeneros.setSelectedItem(cancion.getGenero());
@@ -58,30 +69,87 @@ public class FormularioCancion extends javax.swing.JFrame {
         this.btnAgregar.setText("Modificar");
     }
 
-    //Nuevo registro
-    public FormularioCancion(String title) throws HeadlessException {
-        super(title);
-        initComponents();
-        
-        ArtistController ac = new ArtistController();
-        List<Artist> artistList = ac.listarArtistas();
-        this.listArtistas = new JComboBox<>(artistList.toArray(new Artist[0]));
-        this.listArtistas.revalidate();
-        this.listArtistas.repaint();
-        
-        GenereController gc = new GenereController();
-        List<Genere> genereList = gc.listarGeneros();
-        this.listGeneros = new JComboBox<>(genereList.toArray(new Genere[0]));
-        this.listGeneros.revalidate();
-        this.listGeneros.repaint();
-    }
-    
-    private void atras(){
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION,"Canciones");
+    private void atras() {
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION, "Canciones");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
         dispose();
+    }
+
+    private void iniciarAnnoDuracion() {
+        this.txtFldAnno.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificarContenidoAnno();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificarContenidoAnno();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificarContenidoAnno();
+            }
+        });
+        this.txtFldDuracion.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                verificarContenidoDuracion();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                verificarContenidoDuracion();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                verificarContenidoDuracion();
+            }
+        });
+    }
+
+    private void verificarContenidoAnno() {
+        String texto = this.txtFldAnno.getText();
+
+        try {
+            Integer.parseInt(texto);
+        } catch (NumberFormatException ex) {
+            if (!texto.isEmpty()) {
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(FormularioCancion.this, "Por favor, ingresa solo números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
+                    this.txtFldAnno.setText("");
+                });
+            }
+        }
+    }
+
+    private void verificarContenidoDuracion() {
+        String texto = this.txtFldDuracion.getText();
+
+        try {
+            Integer.parseInt(texto);
+        } catch (NumberFormatException ex) {
+            if (!texto.isEmpty()) {
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(FormularioCancion.this, "Por favor, ingresa solo números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
+                    this.txtFldDuracion.setText("");
+                });
+            }
+        }
+    }
+
+    private boolean existenCamposVacios() {
+        if (this.txtFldAnno.getText().trim().isEmpty()
+                || this.txtFldDuracion.getText().trim().isEmpty()
+                || this.txtFldTitulo.getText().trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -108,6 +176,7 @@ public class FormularioCancion extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel11.setText("Título");
 
@@ -231,21 +300,38 @@ public class FormularioCancion extends javax.swing.JFrame {
 
     private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
         // TODO add your handling code here:
-        Genere genero = (Genere) this.listGeneros.getSelectedItem();
-        Artist artista = (Artist) this.listArtistas.getSelectedItem();
-        Song cancion = new Song(
-        this.txtFldTitulo.getText(),
-                Integer.parseInt(this.txtFldAnno.getText()),
-                Integer.parseInt(this.txtFldDuracion.getText()),
-                artista,genero
-        );
-        SongController sc = new SongController();
-        if(this.idModificacion == 0){
-            sc.crearCancion(cancion);
+
+        if (!this.existenCamposVacios()) {
+            Genere genero = (Genere) this.listGeneros.getSelectedItem();
+            Artist artista = (Artist) this.listArtistas.getSelectedItem();
+            Song cancion = new Song(
+                    this.txtFldTitulo.getText(),
+                    Integer.parseInt(this.txtFldAnno.getText()),
+                    Integer.parseInt(this.txtFldDuracion.getText()),
+                    artista, genero
+            );
+            SongController sc = new SongController();
+            if (this.idModificacion == 0) {
+                this.sc.crearCancion(cancion);
+                JOptionPane.showMessageDialog(FormularioCancion.this,
+                        "Se ha creado nuevo registro de canción.",
+                        "Canción creada",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                this.sc.actualizarCancion(this.idModificacion, cancion);
+                JOptionPane.showMessageDialog(FormularioCancion.this,
+                        "Se ha modificado la canción seleccionada.",
+                        "Canción modificada",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            this.atras();
         } else {
-            sc.actualizarCancion(this.idModificacion, cancion);
+            JOptionPane.showMessageDialog(FormularioCancion.this,
+                    "Debe rellenar todos los campos antes de continuar.",
+                    "Existen campos vacío",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        this.atras();
+
     }//GEN-LAST:event_clicAgregar
 
     private void clicLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicLimpiar

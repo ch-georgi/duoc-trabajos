@@ -29,6 +29,12 @@ public class Artist {
         this.nombre = nombre;
     }
 
+    public Artist(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+
     //Getters y Setters
     public int getId() {
         return id;

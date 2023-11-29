@@ -102,27 +102,18 @@ public class ListaDeElementos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         tituloListaElementos = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         txtFldBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jScrollPane = new javax.swing.JScrollPane();
         listElementos = new javax.swing.JList<>();
         btnAtras = new javax.swing.JButton();
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         tituloListaElementos.setBackground(new java.awt.Color(102, 102, 102));
         tituloListaElementos.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
@@ -183,7 +174,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         listElementos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(listElementos);
+        jScrollPane.setViewportView(listElementos);
 
         btnAtras.setText("Atrás");
         btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,7 +205,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(55, 55, 55)
@@ -236,10 +227,10 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 .addComponent(tituloListaElementos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,6 +320,10 @@ public class ListaDeElementos extends javax.swing.JFrame {
                     break;
             }
             this.recargarLista();
+            JOptionPane.showMessageDialog(ListaDeElementos.this,
+                    "Se ha eliminado el elemento seleccionado.",
+                    "Elemento eliminado",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_clicEliminar
 
@@ -366,20 +361,20 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 case ARTISTA:
                     ArtistController ac = new ArtistController();
                     List<Artist> artistas = ac.buscarArtistasPorNombre(termino.trim());
-                    if(!artistas.isEmpty() && artistas != null){
+                    if (!artistas.isEmpty() && artistas != null) {
                         this.recargarLista(artistas.toArray());
                     } else {
                         this.listElementos.setListData(new Object[0]);
                         this.listElementos.revalidate();
                         this.listElementos.repaint();
-                    }                    
+                    }
                     break;
                 case CANCION:
                     SongController sc = new SongController();
                     List<Song> canciones = sc.buscarCancionPorTitulo(termino.trim());
-                    if(!canciones.isEmpty() && canciones != null){
+                    if (!canciones.isEmpty() && canciones != null) {
                         this.recargarLista(canciones.toArray());
-                    }else{
+                    } else {
                         this.listElementos.setListData(new Object[0]);
                         this.listElementos.revalidate();
                         this.listElementos.repaint();
@@ -388,9 +383,9 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 case GENERO:
                     GenereController gc = new GenereController();
                     List<Genere> generos = gc.buscarGeneroPorNombre(termino.trim());
-                    if(!generos.isEmpty() && generos != null){
+                    if (!generos.isEmpty() && generos != null) {
                         this.recargarLista(generos.toArray());
-                    }else{
+                    } else {
                         this.listElementos.setListData(new Object[0]);
                         this.listElementos.revalidate();
                         this.listElementos.repaint();
@@ -468,10 +463,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JList<Object> listElementos;
     private javax.swing.JLabel tituloListaElementos;
     private javax.swing.JTextField txtFldBuscar;

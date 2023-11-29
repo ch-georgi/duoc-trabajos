@@ -1,9 +1,7 @@
-
 package com.gccg.soundscape.vistas;
 
-
 /**
- * 
+ *
  * *
  *
  * @author Myriam
@@ -15,6 +13,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+
     }
 
     /**
@@ -33,8 +32,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SoundScape");
+        setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Comfortaa", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Menú");
 
@@ -67,11 +67,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
                     .addComponent(menuBtnArtista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuBtnCancion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(menuBtnCancion, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                     .addComponent(menuBtnGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(132, 132, 132))
         );
@@ -80,7 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(menuBtnArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuBtnCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,7 +94,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void menuBtnArtistaClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBtnArtistaClicked
         // TODO add your handling code here:
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.ARTISTA,"Artistas");
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.ARTISTA, "Artistas");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
@@ -103,7 +103,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void menuBtnCancionClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBtnCancionClicked
         // TODO add your handling code here:
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION,"Canciones");
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.CANCION, "Canciones");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
@@ -112,7 +112,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void menuBtnGeneroClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBtnGeneroClicked
         // TODO add your handling code here:
-        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO,"Generos");
+        ListaDeElementos lista = new ListaDeElementos(TipoLista.GENERO, "Generos");
         lista.setSize(440, 320);
         lista.setLocationRelativeTo(null);
         lista.setVisible(true);
