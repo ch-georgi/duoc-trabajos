@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.modelos.Artist;
@@ -40,7 +37,7 @@ public class FormularioArtista extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLimpiar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jLabelFormulario = new javax.swing.JLabel();
         txtFldNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -49,11 +46,21 @@ public class FormularioArtista extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicLimpiar(evt);
+            }
+        });
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicAgregar(evt);
+            }
+        });
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
 
@@ -82,7 +89,7 @@ public class FormularioArtista extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnLimpiar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGuardar))
+                            .addComponent(btnAgregar))
                         .addComponent(txtFldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,16 +119,16 @@ public class FormularioArtista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnAgregar))
                 .addGap(50, 50, 50))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
@@ -131,6 +138,15 @@ public class FormularioArtista extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.atras();
     }//GEN-LAST:event_clicAtras
+
+    private void clicLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicLimpiar
+        // TODO add your handling code here:
+        this.txtFldNombre.setText("");
+    }//GEN-LAST:event_clicLimpiar
+
+    private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clicAgregar
 
     /**
      * @param args the command line arguments
@@ -174,6 +190,7 @@ public class FormularioArtista extends javax.swing.JFrame {
         this.txtFldNombre.setText(artista.getNombre());
         this.idModificacion = artista.getId();
         this.btnLimpiar.setEnabled(false);
+        this.btnAgregar.setText("Modificar");
     }
 
     public JTextField getTxtFldNombre() {
@@ -195,8 +212,8 @@ public class FormularioArtista extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelFormulario;

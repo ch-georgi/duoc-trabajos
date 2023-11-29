@@ -55,6 +55,7 @@ public class FormularioCancion extends javax.swing.JFrame {
         this.txtFldDuracion.setText(Integer.toString(cancion.getDuracion()));
         this.idModificacion = cancion.getId();
         this.btnLimpiar.setEnabled(false);
+        this.btnAgregar.setText("Modificar");
     }
 
     //Nuevo registro
@@ -126,6 +127,11 @@ public class FormularioCancion extends javax.swing.JFrame {
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicLimpiar(evt);
+            }
+        });
 
         jLabel1.setText("Duración");
 
@@ -241,6 +247,15 @@ public class FormularioCancion extends javax.swing.JFrame {
         }
         this.atras();
     }//GEN-LAST:event_clicAgregar
+
+    private void clicLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicLimpiar
+        // TODO add your handling code here:
+        this.txtFldTitulo.setText("");
+        this.txtFldAnno.setText("");
+        this.txtFldDuracion.setText("");
+        this.listArtistas.setSelectedIndex(0);
+        this.listGeneros.setSelectedIndex(0);
+    }//GEN-LAST:event_clicLimpiar
 
     /**
      * @param args the command line arguments

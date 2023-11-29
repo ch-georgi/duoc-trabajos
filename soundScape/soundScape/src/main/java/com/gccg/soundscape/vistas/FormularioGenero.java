@@ -26,6 +26,7 @@ public class FormularioGenero extends javax.swing.JFrame {
         this.txtFldGenero.setText(genero.getGenero());
         this.idModificacion = genero.getId();
         this.btnLimpiar.setEnabled(false);
+        this.btnAgregar.setText("Modificar");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +38,7 @@ public class FormularioGenero extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLimpiar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtFldGenero = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -46,8 +47,18 @@ public class FormularioGenero extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicLimpiar(evt);
+            }
+        });
 
-        btnGuardar.setText("Guardar");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clicAgregar(evt);
+            }
+        });
 
         jLabel1.setText("Título del género");
 
@@ -69,7 +80,7 @@ public class FormularioGenero extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnLimpiar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnGuardar))
+                            .addComponent(btnAgregar))
                         .addComponent(txtFldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +110,7 @@ public class FormularioGenero extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnAgregar))
                 .addGap(50, 50, 50))
         );
 
@@ -114,6 +125,15 @@ public class FormularioGenero extends javax.swing.JFrame {
         lista.setVisible(true);
         dispose();
     }//GEN-LAST:event_clicAtras
+
+    private void clicLimpiar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicLimpiar
+        // TODO add your handling code here:
+        this.txtFldGenero.setText("");
+    }//GEN-LAST:event_clicLimpiar
+
+    private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clicAgregar
 
     /**
      * @param args the command line arguments
@@ -152,8 +172,8 @@ public class FormularioGenero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

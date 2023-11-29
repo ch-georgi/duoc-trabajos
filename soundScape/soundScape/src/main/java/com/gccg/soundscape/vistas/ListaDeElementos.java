@@ -1,4 +1,3 @@
-
 package com.gccg.soundscape.vistas;
 
 import com.gccg.soundscape.controlador.ArtistController;
@@ -11,6 +10,8 @@ import static com.gccg.soundscape.vistas.TipoLista.ARTISTA;
 import static com.gccg.soundscape.vistas.TipoLista.CANCION;
 import static com.gccg.soundscape.vistas.TipoLista.GENERO;
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -41,8 +42,30 @@ public class ListaDeElementos extends javax.swing.JFrame {
         initComponents();
         this.tipo = tipo;
 
-        DefaultListModel<Object> listModel = new DefaultListModel<>();
+        switch (this.tipo) {
+            case ARTISTA:
+                this.tituloListaElementos.setText("Lista de artistas");
+                break;
+            case CANCION:
+                this.tituloListaElementos.setText("Lista de canciones");
+                break;
+            case GENERO:
+                this.tituloListaElementos.setText("Lista de generos");
+                break;
+            default:
+                break;
+        }
+        this.recargarLista();
 
+    }
+
+    private void recargarLista(Object[] lista) {
+        this.listElementos.setListData(lista);
+        this.listElementos.revalidate();
+        this.listElementos.repaint();
+    }
+
+    private void recargarLista() {
         switch (this.tipo) {
             case ARTISTA:
                 ArtistController ac = new ArtistController();
@@ -50,7 +73,6 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 this.listElementos.setListData(artistArray);
                 this.listElementos.revalidate();
                 this.listElementos.repaint();
-                this.tituloListaElementos.setText("Lista de artistas");
                 break;
             case CANCION:
                 SongController sc = new SongController();
@@ -58,7 +80,6 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 this.listElementos.setListData(songArray);
                 this.listElementos.revalidate();
                 this.listElementos.repaint();
-                this.tituloListaElementos.setText("Lista de canciones");
                 break;
             case GENERO:
                 GenereController gc = new GenereController();
@@ -66,12 +87,10 @@ public class ListaDeElementos extends javax.swing.JFrame {
                 this.listElementos.setListData(genereArray);
                 this.listElementos.revalidate();
                 this.listElementos.repaint();
-                this.tituloListaElementos.setText("Lista de generos");
                 break;
             default:
                 break;
         }
-
     }
 
     /**
@@ -235,7 +254,7 @@ public class ListaDeElementos extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -243,47 +262,74 @@ public class ListaDeElementos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void clicModificar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicModificar
-        if(this.listElementos.isSelectionEmpty()){
+        if (this.listElementos.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(ListaDeElementos.this,
-                            "Por favor, selecciona un elemento a modificar.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-        }else{
+                    "Por favor, selecciona un elemento a modificar.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
             switch (this.tipo) {
-            case ARTISTA:
-                Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
-                FormularioArtista formArts = new FormularioArtista("Modificando artista "+
-                        selectedArtist.getNombre(),selectedArtist);
-                formArts.setLocationRelativeTo(null);
-                formArts.setVisible(true);
-                dispose();
-                break;
-            case CANCION:
-                Song selectedSong = (Song) this.listElementos.getSelectedValue();
-                FormularioCancion formCanc = new FormularioCancion(selectedSong,
-                        "Modificando cancion '"+
-                                selectedSong.getTitulo()+"'");
-                formCanc.setLocationRelativeTo(null);
-                formCanc.setVisible(true);
-                dispose();
-                break;
-            case GENERO:
-                Genere selectedGenere = (Genere) this.listElementos.getSelectedValue();
-                FormularioGenero formGen = new FormularioGenero("Modificando genero "+
-                        selectedGenere.getGenero(),selectedGenere);
-                formGen.setLocationRelativeTo(null);
-                formGen.setVisible(true);
-                dispose();
-                break;
-            default:
-                break;
+                case ARTISTA:
+                    Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
+                    FormularioArtista formArts = new FormularioArtista("Modificando artista "
+                            + selectedArtist.getNombre(), selectedArtist);
+                    formArts.setLocationRelativeTo(null);
+                    formArts.setVisible(true);
+                    dispose();
+                    break;
+                case CANCION:
+                    Song selectedSong = (Song) this.listElementos.getSelectedValue();
+                    FormularioCancion formCanc = new FormularioCancion(selectedSong,
+                            "Modificando cancion '"
+                            + selectedSong.getTitulo() + "'");
+                    formCanc.setLocationRelativeTo(null);
+                    formCanc.setVisible(true);
+                    dispose();
+                    break;
+                case GENERO:
+                    Genere selectedGenere = (Genere) this.listElementos.getSelectedValue();
+                    FormularioGenero formGen = new FormularioGenero("Modificando genero "
+                            + selectedGenere.getGenero(), selectedGenere);
+                    formGen.setLocationRelativeTo(null);
+                    formGen.setVisible(true);
+                    dispose();
+                    break;
+                default:
+                    break;
+            }
         }
-        }
-        
+
     }//GEN-LAST:event_clicModificar
 
     private void clicEliminar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicEliminar
         // TODO add your handling code here:
+        if (this.listElementos.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(ListaDeElementos.this,
+                    "Por favor, selecciona un elemento a modificar.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            switch (this.tipo) {
+                case ARTISTA:
+                    Artist selectedArtist = (Artist) this.listElementos.getSelectedValue();
+                    ArtistController ac = new ArtistController();
+                    ac.eliminarArtista(selectedArtist.getId());
+                    break;
+                case CANCION:
+                    Song selectedSong = (Song) this.listElementos.getSelectedValue();
+                    SongController sc = new SongController();
+                    sc.eliminarCancion(selectedSong.getId());
+                    break;
+                case GENERO:
+                    Genere selectedGenere = (Genere) this.listElementos.getSelectedValue();
+                    GenereController gc = new GenereController();
+                    gc.eliminarGenero(selectedGenere.getId());
+                    break;
+                default:
+                    break;
+            }
+            this.recargarLista();
+        }
     }//GEN-LAST:event_clicEliminar
 
     private void clicAgregar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicAgregar
@@ -312,12 +358,60 @@ public class ListaDeElementos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clicAgregar
 
+    private void buscar(String termino) {
+        if (termino.trim().isEmpty()) {
+            this.recargarLista();
+        } else {
+            switch (this.tipo) {
+                case ARTISTA:
+                    ArtistController ac = new ArtistController();
+                    List<Artist> artistas = ac.buscarArtistasPorNombre(termino.trim());
+                    if(!artistas.isEmpty() && artistas != null){
+                        this.recargarLista(artistas.toArray());
+                    } else {
+                        this.listElementos.setListData(new Object[0]);
+                        this.listElementos.revalidate();
+                        this.listElementos.repaint();
+                    }                    
+                    break;
+                case CANCION:
+                    SongController sc = new SongController();
+                    List<Song> canciones = sc.buscarCancionPorTitulo(termino.trim());
+                    if(!canciones.isEmpty() && canciones != null){
+                        this.recargarLista(canciones.toArray());
+                    }else{
+                        this.listElementos.setListData(new Object[0]);
+                        this.listElementos.revalidate();
+                        this.listElementos.repaint();
+                    }
+                    break;
+                case GENERO:
+                    GenereController gc = new GenereController();
+                    List<Genere> generos = gc.buscarGeneroPorNombre(termino.trim());
+                    if(!generos.isEmpty() && generos != null){
+                        this.recargarLista(generos.toArray());
+                    }else{
+                        this.listElementos.setListData(new Object[0]);
+                        this.listElementos.revalidate();
+                        this.listElementos.repaint();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
     private void clicBuscar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clicBuscar
         // TODO add your handling code here:
+        this.buscar(this.txtFldBuscar.getText());
     }//GEN-LAST:event_clicBuscar
 
     private void teclaEnterBuscar(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_teclaEnterBuscar
         // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.buscar(this.txtFldBuscar.getText());
+        }
     }//GEN-LAST:event_teclaEnterBuscar
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed

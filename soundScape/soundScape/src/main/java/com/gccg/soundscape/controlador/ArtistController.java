@@ -42,4 +42,12 @@ public class ArtistController {
             return null;
         }
     }
+    
+    public List<Artist> buscarArtistasPorNombre(String nombre){
+        try{
+            return this.dao.getArtistByNombre(nombre);
+        }catch(Exception e){
+            return null;
+        }
+    }
 }

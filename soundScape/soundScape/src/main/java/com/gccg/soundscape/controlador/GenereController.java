@@ -42,4 +42,12 @@ public class GenereController {
             return null;
         }
     }
+    
+    public List<Genere> buscarGeneroPorNombre(String nombre){
+        try{
+            return this.dao.getGenereByNombre(nombre);
+        }catch(Exception e){
+            return null;
+        }
+    }
 }
